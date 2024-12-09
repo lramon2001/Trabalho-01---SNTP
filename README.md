@@ -77,6 +77,7 @@ A biblioteca chrono é usada para:
 <center>
 <table>
   <tr>
+       <td align="center"><a href="https://github.com/Amandaaaaabreu"><img style="border-radius: 50%;" src="https://github.com/Amandaaaaabreu.png" width="100px;" alt=""/><br /><sub><b>Amanda Abreu</b></sub></a><br />
     <td align="center"><a href="https://github.com/JoseFilipi"><img style="border-radius: 50%;" src="https://github.com/JoseFilipi.png" width="100px;" alt=""/><br /><sub><b>José Filipe</b></sub></a><br />
     <td align="center"><a href="https://github.com/lramon2001"><img style="border-radius: 50%;" src="https://github.com/lramon2001.png" width="100px;" alt=""/><br /><sub><b>Lucas Ramon</b></sub></a><br />
     <td align="center"><a href="https://github.com/Maiconrq"><img style="border-radius: 50%;" src="https://github.com/Maiconrq.png" width="100px;" alt=""/><br /><sub><b>Maicon Rodrigues</b></sub></a><br />
