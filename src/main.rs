@@ -1,14 +1,13 @@
 use std::env;
 use std::net::UdpSocket;
-use std::time::{Duration, UNIX_EPOCH};
-use chrono::{NaiveDateTime, DateTime, Utc, Datelike, Timelike};
+use std::time::Duration;
+use chrono::{DateTime, Utc, TimeZone, Datelike, Timelike};
 use regex::Regex;
 
 const NTP_PACKET_SIZE: usize = 48; // Tamanho do pacote NTP
 const NTP_PORT: u16 = 123;         // Porta padrão do protocolo NTP
 
 fn main() {
-
     let server_ip = get_server_ip();
 
     if !is_valid_ip(&server_ip) {
@@ -115,9 +114,10 @@ fn parse_ntp_response(buffer: &[u8]) -> Option<String> {
     let unix_seconds = tx_seconds.checked_sub(ntp_to_unix)?;
 
     // Converter para o formato legível usando chrono
-    let naive = NaiveDateTime::from_timestamp(unix_seconds as i64, 0);
-    let datetime: DateTime<Utc> = DateTime::from_utc(naive, Utc);
-    Some(format_date_in_portuguese(&datetime))
+    match Utc.timestamp_opt(unix_seconds as i64, 0) {
+        chrono::LocalResult::Single(datetime) => Some(format_date_in_portuguese(&datetime)),
+        _ => None // Trata os casos None e Ambiguous da timestamp_opt
+    }
 }
 
 fn format_date_in_portuguese(datetime: &DateTime<Utc>) -> String {
