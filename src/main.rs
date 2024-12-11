@@ -2,6 +2,7 @@ use std::env;
 use std::net::UdpSocket;
 use std::time::{Duration, UNIX_EPOCH};
 use chrono::{NaiveDateTime, DateTime, Utc, Datelike, Timelike};
+use regex::Regex;
 
 const NTP_PACKET_SIZE: usize = 48; // Tamanho do pacote NTP
 const NTP_PORT: u16 = 123;         // Porta padrão do protocolo NTP
@@ -9,6 +10,11 @@ const NTP_PORT: u16 = 123;         // Porta padrão do protocolo NTP
 fn main() {
 
     let server_ip = get_server_ip();
+
+    if !is_valid_ip(&server_ip) {
+        eprintln!("Endereço IP inválido: {}", server_ip);
+        std::process::exit(1);
+    }
 
     // Criar o socket UDP
     let socket = UdpSocket::bind("0.0.0.0:0").expect("Erro ao criar o socket");
@@ -133,4 +139,12 @@ fn format_date_in_portuguese(datetime: &DateTime<Utc>) -> String {
         datetime.second(),
         datetime.year()
     )
+}
+
+
+fn is_valid_ip(ip: &str) -> bool {
+    let regex_ipv4 = Regex::new(r"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$").unwrap();
+    let regex_ipv6 = Regex::new(r"^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$").unwrap();
+
+    regex_ipv4.is_match(ip) || regex_ipv6.is_match(ip)
 }
