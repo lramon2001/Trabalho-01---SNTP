@@ -6,9 +6,12 @@ Este projeto implementa um cliente para o protocolo **SNTP (Simple Network Time 
 
 ## **Passos para Rodar o Cliente**
 
-1. Certifique-se de ter o Rust instalado no sistema. Caso não tenha, instale-o com o comando:
+1. Certifique-se de ter o Rust instalado no sistema. Caso não tenha, instale-o com o dois comando abaixo:
 ```bash
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+```bash
+   sudo apt install cargo
 ```
 
 2. Clone o repositório do projeto:
